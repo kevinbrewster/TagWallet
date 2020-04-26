@@ -26,7 +26,7 @@ to update the file with valid values to enable decrpytion and cloning of certain
 `tagProducts`: An array of previously dumped tag data.
 
 
-`initialTagWallet.json`
+`initialTagWallet.json` :
 
 ```json
 {

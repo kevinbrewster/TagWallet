@@ -12,15 +12,19 @@ iPhone 7 or above and iOS 13 or above (for NFC write capabilities)
 ## Installation
 
 There is no binary available and the app is not available on the App Store. You need to download the code, 
-open in XCode and manually run it on an iPhone. 
+open in Xcode and manually run it on an iPhone. 
 
 ## Configuration
 
-In the TagWalletUI folder is a file `tagWallet.json`. By default, this file is misconfigured. You will need 
+In the TagWalletUI folder is a file `initialTagWallet.json`. By default, this file is misconfigured. You will need 
 to update the file with valid values to enable decrpytion and cloning of certain NTAG215 cards. 
 
 `staticKey`: An 80-byte base64 encoded retail key (aka "locked-secret.bin")
+
 `dataKey`: An 80-byte base64 encoded retail key (aka "unfixed-info.bin")
+
+`initialTagWallet`: An array of previously dumped tag data.
+
 
 `tagWallet.json`
 

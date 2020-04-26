@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		67BC1483245205A00028E9FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC1482245205A00028E9FE /* AppDelegate.swift */; };
+		67BC1485245205A00028E9FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC1484245205A00028E9FE /* SceneDelegate.swift */; };
+		67BC148A245205A00028E9FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67BC1488245205A00028E9FE /* Main.storyboard */; };
+		67BC148C245205A20028E9FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67BC148B245205A20028E9FE /* Assets.xcassets */; };
+		67BC148F245205A20028E9FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67BC148D245205A20028E9FE /* LaunchScreen.storyboard */; };
+		67BC1498245206C70028E9FE /* TagProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC1497245206C70028E9FE /* TagProduct.swift */; };
+		67BC149C245206F00028E9FE /* TagEncyption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC149B245206F00028E9FE /* TagEncyption.swift */; };
+		67BC149F245207930028E9FE /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 67BC149E245207930028E9FE /* CryptoSwift */; };
+		67BC14A1245208190028E9FE /* TagProductsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14A0245208190028E9FE /* TagProductsCollectionViewController.swift */; };
+		67BC14A324520A350028E9FE /* TagProductsCollectionViewController+TagReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14A224520A350028E9FE /* TagProductsCollectionViewController+TagReading.swift */; };
+		67BC14A524520A5E0028E9FE /* TagProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14A424520A5E0028E9FE /* TagProductViewController.swift */; };
+		67BC14A924520BAB0028E9FE /* TagDump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14A824520BAB0028E9FE /* TagDump.swift */; };
+		67BC14AC24520BB70028E9FE /* NTAG215Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14AA24520BB70028E9FE /* NTAG215Tag.swift */; };
+		67BC14AD24520BB70028E9FE /* MiFareTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14AB24520BB70028E9FE /* MiFareTag.swift */; };
+		67CC96952456228800592A27 /* tagWallet.json in Resources */ = {isa = PBXBuildFile; fileRef = 67CC96942456228800592A27 /* tagWallet.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		67BC147F245205A00028E9FE /* TagWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67BC1482245205A00028E9FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		67BC1484245205A00028E9FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		67BC1489245205A00028E9FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		67BC148B245205A20028E9FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		67BC148E245205A20028E9FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		67BC1490245205A20028E9FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67BC1497245206C70028E9FE /* TagProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagProduct.swift; sourceTree = "<group>"; };
+		67BC149B245206F00028E9FE /* TagEncyption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagEncyption.swift; sourceTree = "<group>"; };
+		67BC14A0245208190028E9FE /* TagProductsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagProductsCollectionViewController.swift; sourceTree = "<group>"; };
+		67BC14A224520A350028E9FE /* TagProductsCollectionViewController+TagReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TagProductsCollectionViewController+TagReading.swift"; sourceTree = "<group>"; };
+		67BC14A424520A5E0028E9FE /* TagProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagProductViewController.swift; sourceTree = "<group>"; };
+		67BC14A824520BAB0028E9FE /* TagDump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDump.swift; sourceTree = "<group>"; };
+		67BC14AA24520BB70028E9FE /* NTAG215Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTAG215Tag.swift; sourceTree = "<group>"; };
+		67BC14AB24520BB70028E9FE /* MiFareTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiFareTag.swift; sourceTree = "<group>"; };
+		67CC96932454091E00592A27 /* TagWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TagWallet.entitlements; sourceTree = "<group>"; };
+		67CC96942456228800592A27 /* tagWallet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tagWallet.json; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		67BC147C245205A00028E9FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67BC149F245207930028E9FE /* CryptoSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		67BC1476245205A00028E9FE = {
+			isa = PBXGroup;
+			children = (
+				67BC1496245205F10028E9FE /* TagWallet */,
+				67BC1481245205A00028E9FE /* TagWalletUI */,
+				67BC1480245205A00028E9FE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		67BC1480245205A00028E9FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				67BC147F245205A00028E9FE /* TagWallet.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		67BC1481245205A00028E9FE /* TagWalletUI */ = {
+			isa = PBXGroup;
+			children = (
+				67CC96942456228800592A27 /* tagWallet.json */,
+				67BC1482245205A00028E9FE /* AppDelegate.swift */,
+				67BC1484245205A00028E9FE /* SceneDelegate.swift */,
+				67BC1497245206C70028E9FE /* TagProduct.swift */,
+				67BC1488245205A00028E9FE /* Main.storyboard */,
+				67BC148B245205A20028E9FE /* Assets.xcassets */,
+				67BC14A0245208190028E9FE /* TagProductsCollectionViewController.swift */,
+				67BC14A224520A350028E9FE /* TagProductsCollectionViewController+TagReading.swift */,
+				67BC14A424520A5E0028E9FE /* TagProductViewController.swift */,
+				67BC148D245205A20028E9FE /* LaunchScreen.storyboard */,
+				67BC1490245205A20028E9FE /* Info.plist */,
+			);
+			path = TagWalletUI;
+			sourceTree = "<group>";
+		};
+		67BC1496245205F10028E9FE /* TagWallet */ = {
+			isa = PBXGroup;
+			children = (
+				67CC96932454091E00592A27 /* TagWallet.entitlements */,
+				67BC14AB24520BB70028E9FE /* MiFareTag.swift */,
+				67BC14AA24520BB70028E9FE /* NTAG215Tag.swift */,
+				67BC14A824520BAB0028E9FE /* TagDump.swift */,
+				67BC149B245206F00028E9FE /* TagEncyption.swift */,
+			);
+			path = TagWallet;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		67BC147E245205A00028E9FE /* TagWallet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67BC1493245205A20028E9FE /* Build configuration list for PBXNativeTarget "TagWallet" */;
+			buildPhases = (
+				67BC147B245205A00028E9FE /* Sources */,
+				67BC147C245205A00028E9FE /* Frameworks */,
+				67BC147D245205A00028E9FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TagWallet;
+			packageProductDependencies = (
+				67BC149E245207930028E9FE /* CryptoSwift */,
+			);
+			productName = TagWallet;
+			productReference = 67BC147F245205A00028E9FE /* TagWallet.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		67BC1477245205A00028E9FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Kevin Brewster";
+				TargetAttributes = {
+					67BC147E245205A00028E9FE = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 67BC147A245205A00028E9FE /* Build configuration list for PBXProject "TagWallet" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 67BC1476245205A00028E9FE;
+			packageReferences = (
+				67BC149D245207930028E9FE /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+			);
+			productRefGroup = 67BC1480245205A00028E9FE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				67BC147E245205A00028E9FE /* TagWallet */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		67BC147D245205A00028E9FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67BC148F245205A20028E9FE /* LaunchScreen.storyboard in Resources */,
+				67BC148C245205A20028E9FE /* Assets.xcassets in Resources */,
+				67BC148A245205A00028E9FE /* Main.storyboard in Resources */,
+				67CC96952456228800592A27 /* tagWallet.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		67BC147B245205A00028E9FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67BC1498245206C70028E9FE /* TagProduct.swift in Sources */,
+				67BC14AD24520BB70028E9FE /* MiFareTag.swift in Sources */,
+				67BC14A1245208190028E9FE /* TagProductsCollectionViewController.swift in Sources */,
+				67BC14AC24520BB70028E9FE /* NTAG215Tag.swift in Sources */,
+				67BC14A924520BAB0028E9FE /* TagDump.swift in Sources */,
+				67BC14A524520A5E0028E9FE /* TagProductViewController.swift in Sources */,
+				67BC14A324520A350028E9FE /* TagProductsCollectionViewController+TagReading.swift in Sources */,
+				67BC1483245205A00028E9FE /* AppDelegate.swift in Sources */,
+				67BC1485245205A00028E9FE /* SceneDelegate.swift in Sources */,
+				67BC149C245206F00028E9FE /* TagEncyption.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		67BC1488245205A00028E9FE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				67BC1489245205A00028E9FE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		67BC148D245205A20028E9FE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				67BC148E245205A20028E9FE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		67BC1491245205A20028E9FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		67BC1492245205A20028E9FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		67BC1494245205A20028E9FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TagWallet/TagWallet.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G68Z6JNXEP;
+				INFOPLIST_FILE = TagWalletUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kevinbrewster.TagWallet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		67BC1495245205A20028E9FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TagWallet/TagWallet.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G68Z6JNXEP;
+				INFOPLIST_FILE = TagWalletUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kevinbrewster.TagWallet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		67BC147A245205A00028E9FE /* Build configuration list for PBXProject "TagWallet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67BC1491245205A20028E9FE /* Debug */,
+				67BC1492245205A20028E9FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		67BC1493245205A20028E9FE /* Build configuration list for PBXNativeTarget "TagWallet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67BC1494245205A20028E9FE /* Debug */,
+				67BC1495245205A20028E9FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		67BC149D245207930028E9FE /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		67BC149E245207930028E9FE /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67BC149D245207930028E9FE /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 67BC1477245205A00028E9FE /* Project object */;
+}

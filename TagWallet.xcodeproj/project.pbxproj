@@ -21,7 +21,7 @@
 		67BC14A924520BAB0028E9FE /* TagDump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14A824520BAB0028E9FE /* TagDump.swift */; };
 		67BC14AC24520BB70028E9FE /* NTAG215Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14AA24520BB70028E9FE /* NTAG215Tag.swift */; };
 		67BC14AD24520BB70028E9FE /* MiFareTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC14AB24520BB70028E9FE /* MiFareTag.swift */; };
-		67CC96952456228800592A27 /* tagWallet.json in Resources */ = {isa = PBXBuildFile; fileRef = 67CC96942456228800592A27 /* tagWallet.json */; };
+		67CC96952456228800592A27 /* initialTagWallet.json in Resources */ = {isa = PBXBuildFile; fileRef = 67CC96942456228800592A27 /* initialTagWallet.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		67BC14AA24520BB70028E9FE /* NTAG215Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTAG215Tag.swift; sourceTree = "<group>"; };
 		67BC14AB24520BB70028E9FE /* MiFareTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiFareTag.swift; sourceTree = "<group>"; };
 		67CC96932454091E00592A27 /* TagWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TagWallet.entitlements; sourceTree = "<group>"; };
-		67CC96942456228800592A27 /* tagWallet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tagWallet.json; sourceTree = "<group>"; };
+		67CC96942456228800592A27 /* initialTagWallet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = initialTagWallet.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 		67BC1481245205A00028E9FE /* TagWalletUI */ = {
 			isa = PBXGroup;
 			children = (
-				67CC96942456228800592A27 /* tagWallet.json */,
+				67CC96942456228800592A27 /* initialTagWallet.json */,
 				67BC1482245205A00028E9FE /* AppDelegate.swift */,
 				67BC1484245205A00028E9FE /* SceneDelegate.swift */,
 				67BC1497245206C70028E9FE /* TagProduct.swift */,
@@ -170,7 +170,7 @@
 				67BC148F245205A20028E9FE /* LaunchScreen.storyboard in Resources */,
 				67BC148C245205A20028E9FE /* Assets.xcassets in Resources */,
 				67BC148A245205A00028E9FE /* Main.storyboard in Resources */,
-				67CC96952456228800592A27 /* tagWallet.json in Resources */,
+				67CC96952456228800592A27 /* initialTagWallet.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

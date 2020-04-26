@@ -49,7 +49,7 @@ class TagProductsCollectionViewContoller : UIViewController {
     
     func loadTagWallet() {
         // Copy the built-in tagWallet.json file from bundle to documents folder if it doesn't exist
-        if !FileManager.default.fileExists(atPath: tagWalletURL.path), let builtInDataURL = Bundle.main.url(forResource: "tagWallet", withExtension: "json") {
+        if !FileManager.default.fileExists(atPath: tagWalletURL.path), let builtInDataURL = Bundle.main.url(forResource: "initialTagWallet", withExtension: "json") {
             do {
                 try FileManager.default.copyItem(at: builtInDataURL, to: tagWalletURL)
             } catch let error {

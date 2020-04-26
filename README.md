@@ -1,6 +1,6 @@
 # TagWallet
 
-TagWallet is an simple iOS app to manage MiFare NTAG215 NFC (e.g. Amiibo) tags. You can read NTAG215 tags, save the data dumps, 
+TagWallet is an simple iOS app to manage MiFare NTAG215 NFC (e.g. Amiibo) tags. You can read tags, save the data dumps, 
 and optionally write those data dumps to a new blank tag.
 
 It's similar to the Android [TagMo](https://github.com/HiddenRamblings/TagMo) App.

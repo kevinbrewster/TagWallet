@@ -23,10 +23,10 @@ to update the file with valid values to enable decrpytion and cloning of certain
 
 `dataKey`: An 80-byte base64 encoded retail key (aka "unfixed-info.bin")
 
-`initialTagWallet`: An array of previously dumped tag data.
+`tagProducts`: An array of previously dumped tag data.
 
 
-`tagWallet.json`
+`initialTagWallet.json`
 
 ```json
 {

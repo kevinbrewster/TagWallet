@@ -68,27 +68,24 @@ extension NFCMiFareTag {
         }
     }
     func fastRead(start: UInt8, end: UInt8, batchSize: UInt8, completionHandler: @escaping (Data, Error?) -> Void) {
+        // FAST_READ seems to timeout if you try to read too many pages at once, so necessary to read in batches!
         _fastRead(start: start, end: end, batchSize: batchSize, accumulatedData: Data(), completionHandler: completionHandler)
     }
     private func _fastRead(start: UInt8, end: UInt8, batchSize: UInt8, accumulatedData: Data, completionHandler: @escaping (Data, Error?) -> Void) {
         // Note: The FAST_READ Command is INCLUSIVE of both the start page end page!
-        
         let batchEnd = min(start + batchSize - 1, end)
         sendMiFareCommand(commandPacket: Data([0x3A, start, batchEnd])) { (data, error) in
             guard error == nil else {
                 completionHandler(Data(), error)
                 return
             }
-            NSLog("Got \(data) from \(start) to \(batchEnd)")
             let accumulatedData = accumulatedData + data
             
             if batchEnd < end {
                 self._fastRead(start: batchEnd + 1, end: end, batchSize: batchSize, accumulatedData: accumulatedData, completionHandler: completionHandler)
             } else {
-                // all done!
                 completionHandler(accumulatedData, nil)
             }
-            
         }
     }
     func write(page: Int, data: Data, completionHandler: @escaping (NFCMiFareTagWriteResult) -> Void) {
@@ -96,7 +93,6 @@ extension NFCMiFareTag {
             completionHandler(NFCMiFareTagWriteResult.failure(NFCMiFareTagError.invalidData))
             return
         }
-        NSLog("MiFare Write page #\(page): data.startIndex = \(data.startIndex), data = \(data.map { String($0) })")
         let commandPacket = Data([0xA2, UInt8(page)]) + data
         sendMiFareCommand(commandPacket: commandPacket) { (data, error) in
             if let error = error {
@@ -104,11 +100,9 @@ extension NFCMiFareTag {
                 return
             }
             guard data.count == 1 else {
-                NSLog("WRITE ERROR: data = \(data.map { String($0)})")
                 completionHandler(.failure(NFCMiFareTagError.unknownError))
                 return
             }
-            NSLog("MiFare Write Response: \(data[0])")
             completionHandler(NFCMiFareTagWriteResult(ack: data[0]))
         }
     }
@@ -116,20 +110,16 @@ extension NFCMiFareTag {
         if let write = batch.first {
             //NSLog("Gonna write page #\(batch.page)")
             self.write(page: write.page, data: write.data) { result in
-                NSLog("Write page #\(write.page): \(result)")
                 switch result {
                     case .success:
-                        NSLog("Write success, so moving onto the next batch")
                         self.write(batch: Array(batch[1..<batch.count]), completionHandler: completionHandler)
                     case .failure(let error):
-                        // As soon as we have a failure, stop processing
-                        NSLog("Write error, so ending now")
+                        // End early if there's an error
                         completionHandler(.failure(error))
                 }
             }
         } else {
             // all done
-            NSLog("Write batch all done")
             completionHandler(.success)
         }
     }

@@ -44,6 +44,15 @@ class TagProductsCollectionViewContoller : UIViewController {
                                 
         setupSearchController()
         loadTagWallet()
+        
+        
+        print("dataKey")
+        //print(tagWallet!.dataKey!.magicBytes.map { String($0)})
+        print(tagWallet!.dataKey!.xorPad.map { String($0)})
+        
+        print("staticKey")
+        //print(tagWallet!.staticKey!.magicBytes.map { String($0)})
+        print(tagWallet!.staticKey!.xorPad.map { String($0)})
     }
     
     

@@ -46,7 +46,7 @@ struct TagKey : Codable {
             hmacKey: output.subdata(in: 32..<48)
         )
     }
-    func hmac(seed: Data, iteration: UInt8) -> Data {
+    private func hmac(seed: Data, iteration: UInt8) -> Data {
         var hmac = CryptoKit.HMAC<SHA256>.init(key: SymmetricKey(data: hmacKey))
         let data = Data([(iteration >> 8) & 0x0f, (iteration >> 0) & 0x0f]) + seed
         hmac.update(data: data)

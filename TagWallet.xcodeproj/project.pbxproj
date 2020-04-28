@@ -76,6 +76,7 @@
 		67BC1481245205A00028E9FE /* TagWalletUI */ = {
 			isa = PBXGroup;
 			children = (
+				67CC96932454091E00592A27 /* TagWallet.entitlements */,
 				67CC96942456228800592A27 /* initialTagWallet.json */,
 				67BC1482245205A00028E9FE /* AppDelegate.swift */,
 				67BC1484245205A00028E9FE /* SceneDelegate.swift */,
@@ -94,7 +95,6 @@
 		67BC1496245205F10028E9FE /* TagWallet */ = {
 			isa = PBXGroup;
 			children = (
-				67CC96932454091E00592A27 /* TagWallet.entitlements */,
 				67BC14AB24520BB70028E9FE /* MiFareTag.swift */,
 				67BC14AA24520BB70028E9FE /* NTAG215Tag.swift */,
 				67BC14A824520BAB0028E9FE /* TagDump.swift */,
@@ -334,7 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TagWallet/TagWallet.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TagWalletUI/TagWallet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G68Z6JNXEP;
 				INFOPLIST_FILE = TagWalletUI/Info.plist;
@@ -353,7 +353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TagWallet/TagWallet.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TagWalletUI/TagWallet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G68Z6JNXEP;
 				INFOPLIST_FILE = TagWalletUI/Info.plist;

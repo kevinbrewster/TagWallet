@@ -15,7 +15,6 @@ struct TagKey : Codable {
     
     var hmacKey: Data { data.subdata(in: 0..<16) }
     var typeString: Data { data.subdata(in: 16..<30) }
-    var rhu: UInt8 { data[30] }
     var magicBytesSize: UInt8 { data[31] }
     var magicBytes: Data { data.subdata(in: 32..<(32 + Int(magicBytesSize))) }
     var xorPad: Data { data.subdata(in: 48..<80) }
@@ -32,7 +31,9 @@ struct TagKey : Codable {
     }
     func derivedKey(uid: Data, writeCounter: Data, salt: Data) -> DerivedTagKey {
         var seed = Data(typeString)
-        seed.append( (writeCounter + Data(repeating: 0, count: 14))[0..<16 - magicBytesSize] )
+        if magicBytesSize < 16 {
+            seed.append(writeCounter)
+        }
         seed.append(magicBytes)
         seed.append(uid[0..<8])
         seed.append(uid[0..<8])

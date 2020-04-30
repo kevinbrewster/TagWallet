@@ -68,11 +68,13 @@ class TagProductsCollectionViewContoller : UIViewController {
             
         }
     }
+    
+    
     func saveTagWallet() {
         do {
             let tagWalletData = try JSONEncoder().encode(tagWallet)
             try tagWalletData.write(to: tagWalletURL)
-            NSLog("DONE: \(tagWalletURL)")
+            NSLog("Saved tag wallet to: \(tagWalletURL)")
         } catch let error {
             NSLog("Error writing tagWallet.json: \(error)")
             return

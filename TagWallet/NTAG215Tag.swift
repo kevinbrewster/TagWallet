@@ -20,7 +20,7 @@ class NTAG215Tag {
     let versionInfo: NFCMiFareTagVersionInfo
     let dump: TagDump
     var isLocked: Bool
-    
+    var isAmiibo: Bool
     
     static func initialize(tag: NFCMiFareTag, completionHandler: @escaping (Result<NTAG215Tag, Swift.Error>) -> Void) {
         tag.getVersion() { result in
@@ -32,11 +32,23 @@ class NTAG215Tag {
                     completionHandler(.failure(Error.invalidTagType))
                     return
                 }
-                tag.fastRead(start: 0, end: 0x86, batchSize: 0x20) { (data, error) in
-                    if let ntag215Tag = NTAG215Tag(tag: tag, versionInfo: versionInfo, data: data) {
-                        completionHandler(.success(ntag215Tag))
-                    } else {
-                        completionHandler(.failure(Error.unknownError))
+                tag.getSignature { result in
+                    switch result {
+                    case .failure(let error):
+                        completionHandler(.failure(error))
+                    case .success(let signature):
+                        guard signature.count == 32 else {
+                            completionHandler(.failure(Error.invalidTagType))
+                            return
+                        }
+
+                        tag.fastRead(start: 0, end: 0x86, batchSize: 0x20) { (data, error) in
+                            if let ntag215Tag = NTAG215Tag(tag: tag, versionInfo: versionInfo, data: data, signature: signature) {
+                                completionHandler(.success(ntag215Tag))
+                            } else {
+                                completionHandler(.failure(Error.unknownError))
+                            }
+                        }
                     }
                 }
             }
@@ -44,17 +56,18 @@ class NTAG215Tag {
     }
     
     
-    init?(tag: NFCMiFareTag, versionInfo: NFCMiFareTagVersionInfo, data: Data) {
+    init?(tag: NFCMiFareTag, versionInfo: NFCMiFareTagVersionInfo, data: Data, signature: Data) {
         guard versionInfo.isNFC215 else {
             return nil
         }
-        guard let dump = TagDump(data: data) else {
+        guard let dump = TagDump(data: data + signature) else {
             return nil
         }
         self.tag = tag
         self.versionInfo = versionInfo
         self.dump = dump
-        isLocked = data[10] != 0 && data[11] != 0
+        isLocked = dump.isLocked
+        isAmiibo = dump.isAmiibo
     }
     
     func patchAndWriteDump(_ originalDump: TagDump, staticKey: TagKey, dataKey: TagKey, completionHandler: @escaping (NFCMiFareTagWriteResult) -> Void) {
@@ -84,10 +97,40 @@ class NTAG215Tag {
         }
     }
     
-    // todo
-    // is this the same as "restore" ??
-    func writeAppData(from dump: TagDump, completionHandler: @escaping (NFCMiFareTagWriteResult) -> Void) {
-        
+    func patchAndWriteAppData(_ originalDump: TagDump, staticKey: TagKey, dataKey: TagKey, completionHandler: @escaping (NFCMiFareTagWriteResult) -> Void) {
+        do {
+            let patchedDump = try originalDump.patchedDump(withUID: dump.uid, staticKey: staticKey, dataKey: dataKey)
+            
+            let password = try TagDump.password(uid: dump.uid)
+            var writes = [(Int, Data)]()
+            
+            tag.sendMiFareCommand(commandPacket: Data([0x1B] + password[0..<4])) { (data, error) in
+                if error != nil {
+                    completionHandler(.failure(error!))
+                    return
+                }
+                
+                if data.elementsEqual([0x80, 0x80]) {
+                    for page in 4...12 {
+                        let dataStartIndex = page * 4
+                        writes += [(page, patchedDump.data.subdata(in: dataStartIndex..<dataStartIndex+4))]
+                    }
+                    
+                    for page in 32...129 {
+                        let dataStartIndex = page * 4
+                        writes += [(page, patchedDump.data.subdata(in: dataStartIndex..<dataStartIndex+4))]
+                    }
+
+                    self.tag.write(batch: writes) { result in
+                        completionHandler(result)
+                    }
+                } else {
+                    completionHandler(.success)
+                }
+            }
+        } catch let error {
+            completionHandler(.failure(error))
+        }
     }
 }
 

@@ -67,6 +67,17 @@ extension NFCMiFareTag {
             }
         }
     }
+    func getSignature(completionHandler: @escaping (Result<Data, Error>) -> Void) {
+        sendMiFareCommand(commandPacket: Data([0x3C, 0x00])) { (data, error) in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else if data.count == 32 {
+                completionHandler(.success(data))
+            } else {
+                completionHandler(.failure(NFCMiFareTagError.unknownError))
+            }
+        }
+    }
     func fastRead(start: UInt8, end: UInt8, batchSize: UInt8, completionHandler: @escaping (Data, Error?) -> Void) {
         // FAST_READ seems to timeout if you try to read too many pages at once, so necessary to read in batches!
         _fastRead(start: start, end: end, batchSize: batchSize, accumulatedData: Data(), completionHandler: completionHandler)

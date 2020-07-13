@@ -9,18 +9,23 @@
 import Foundation
 
 typealias TagUID = Data // Full Nine-byte UID
+typealias TagSignature = Data // 32-byte signature
 
 struct TagDump : Codable, Equatable {
     enum Error : Swift.Error {
         case invalidUID
     }
     let data: Data
+    let isLocked: Bool
+    let isAmiibo: Bool
     
     init?(data: Data) {
-        guard data.count >= 532 else {
+        guard data.count == 532 || data.count == 540 || data.count == 572 else {
             NSLog("TagDump: invalid data of \(data.count)")
             return nil }
-        self.data = data.subdata(in: 0..<min(532, data.count))
+        self.data = data
+        self.isLocked = data[10] != 0 && data[11] != 0
+        self.isAmiibo = data[10...15].elementsEqual([0x0F, 0xE0, 0xF1, 0x10, 0xFF, 0xEE]) && data[520...522].elementsEqual([0x01, 0x00, 0x0F]) && data[524...531].elementsEqual([0x00, 0x00, 0x00, 0x04, 0x5F, 0x00, 0x00, 0x00])
     }
     
     static func password(uid: TagUID) throws -> Data {
@@ -40,9 +45,28 @@ struct TagDump : Codable, Equatable {
     var tailHex: String {
         return data[88..<92].map { String(format: "%02hhx", $0) }.joined()
     }
+    var fullHex: String {
+        return data[84..<92].map { String(format: "%02hhx", $0) }.joined()
+    }
     
     
     var uid: TagUID { data.subdata(in: 0..<9) }
+    var signature: TagSignature? {
+        if data.count == 572 {
+            return data[540..<572]
+        }
+        return nil
+    }
+    var gameSeriesHex: String {
+        return String(fullHex.prefix(3))
+    }
+    var amiiboSeriesHex: String {
+        return String(fullHex.prefix(14).suffix(2))
+    }
+    var typeHex: String {
+        return String(fullHex.prefix(8).suffix(2))
+    }
+    
     private var writeCounter: Data { data.subdata(in: 17..<19) }
     private var keygenSalt: Data { data.subdata(in: 96..<128) }
     

@@ -68,20 +68,37 @@ struct TagDump : Codable, Equatable {
     }
     
     private var writeCounter: Data { data.subdata(in: 17..<19) }
+    var writeCounterInt: UInt16 {
+        var counterHex = writeCounter
+        return (UInt16(counterHex[0]) << 8) | UInt16(counterHex[1])
+    }
     private var keygenSalt: Data { data.subdata(in: 96..<128) }
     
-    func patchedDump(withUID newUID: TagUID, staticKey: TagKey, dataKey: TagKey) throws -> TagDump {
+    func patchedDump(withUID newUID: TagUID, staticKey: TagKey, dataKey: TagKey, skipDecrypt: Bool = false) throws -> TagDump {
         guard newUID.count == 9 else {
             throw Error.invalidUID
         }
+        
         // Decrypt the data
-        let decryptDataKeys = dataKey.derivedKey(uid: uid, writeCounter: writeCounter, salt: keygenSalt)
-        let decryptedData = try decryptDataKeys.decrypt(data.subdata(in: 20..<52) + data.subdata(in: 160..<520))
+        let decryptedData = try { () -> Data in
+            if skipDecrypt {
+                return Data(data.subdata(in: 20..<52) + data.subdata(in: 160..<520))
+            }
+            
+            let decryptDataKeys = dataKey.derivedKey(uid: uid, writeCounter: writeCounter, salt: keygenSalt)
+            return try decryptDataKeys.decrypt(data.subdata(in: 20..<52) + data.subdata(in: 160..<520))
+        }()
+        
+        var paddedDecrypted = Data(count: 392)
+        paddedDecrypted[0..<(decryptedData.count)] = decryptedData[0..<(decryptedData.count)]
+        if paddedDecrypted.count != decryptedData.count {
+            print("Decrypted data size mismatch")
+        }
         
         var newData = Data(data)
         newData[0..<9] = newUID
-        newData[20..<52] = decryptedData[0..<32]
-        newData[160..<520] = decryptedData[32..<392]
+        newData[20..<52] = paddedDecrypted[0..<32]
+        newData[160..<520] = paddedDecrypted[32..<392]
         
                 
         // Generated tag HMAC
@@ -96,8 +113,15 @@ struct TagDump : Codable, Equatable {
         
         // Re-encrypt the data
         let encryptedData = try encryptDataKeys.decrypt(decryptedData)
-        newData[20..<52] = encryptedData[0..<32]
-        newData[160..<520] = encryptedData[32..<392]
+        
+        var paddedEncrypted = Data(count: 392)
+        paddedEncrypted[0..<(encryptedData.count)] = encryptedData[0..<(encryptedData.count)]
+        if paddedEncrypted.count != encryptedData.count {
+            print("Encrypted data size mismatch")
+        }
+        
+        newData[20..<52] = paddedEncrypted[0..<32]
+        newData[160..<520] = paddedEncrypted[32..<392]
             
         return TagDump(data: newData)!
     }

@@ -97,10 +97,8 @@ class NTAG215Tag {
         }
     }
     
-    func patchAndWriteAppData(_ originalDump: TagDump, staticKey: TagKey, dataKey: TagKey, completionHandler: @escaping (NFCMiFareTagWriteResult) -> Void) {
+    func writeAppData(_ dump: TagDump, completionHandler: @escaping (NFCMiFareTagWriteResult) -> Void) {
         do {
-            let patchedDump = try originalDump.patchedDump(withUID: dump.uid, staticKey: staticKey, dataKey: dataKey)
-            
             let password = try TagDump.password(uid: dump.uid)
             var writes = [(Int, Data)]()
             
@@ -113,12 +111,12 @@ class NTAG215Tag {
                 if data.elementsEqual([0x80, 0x80]) {
                     for page in 4...12 {
                         let dataStartIndex = page * 4
-                        writes += [(page, patchedDump.data.subdata(in: dataStartIndex..<dataStartIndex+4))]
+                        writes += [(page, dump.data.subdata(in: dataStartIndex..<dataStartIndex+4))]
                     }
                     
                     for page in 32...129 {
                         let dataStartIndex = page * 4
-                        writes += [(page, patchedDump.data.subdata(in: dataStartIndex..<dataStartIndex+4))]
+                        writes += [(page, dump.data.subdata(in: dataStartIndex..<dataStartIndex+4))]
                     }
 
                     self.tag.write(batch: writes) { result in
@@ -128,6 +126,16 @@ class NTAG215Tag {
                     completionHandler(.success)
                 }
             }
+        } catch let error {
+            completionHandler(.failure(error))
+        }
+    }
+    
+    func patchAndWriteAppData(_ originalDump: TagDump, staticKey: TagKey, dataKey: TagKey, completionHandler: @escaping (NFCMiFareTagWriteResult) -> Void) {
+        do {
+            let patchedDump = try originalDump.patchedDump(withUID: dump.uid, staticKey: staticKey, dataKey: dataKey)
+            
+            writeAppData(patchedDump, completionHandler: completionHandler)
         } catch let error {
             completionHandler(.failure(error))
         }

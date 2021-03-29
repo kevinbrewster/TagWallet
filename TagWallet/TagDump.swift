@@ -69,7 +69,7 @@ struct TagDump : Codable, Equatable {
     
     private var writeCounter: Data { data.subdata(in: 17..<19) }
     var writeCounterInt: UInt16 {
-        var counterHex = writeCounter
+        let counterHex = writeCounter
         return (UInt16(counterHex[0]) << 8) | UInt16(counterHex[1])
     }
     private var keygenSalt: Data { data.subdata(in: 96..<128) }
@@ -91,10 +91,11 @@ struct TagDump : Codable, Equatable {
         
         var paddedDecrypted = Data(count: 392)
         paddedDecrypted[0..<(decryptedData.count)] = decryptedData[0..<(decryptedData.count)]
+        
         if paddedDecrypted.count != decryptedData.count {
             print("Decrypted data size mismatch")
         }
-        
+
         var newData = Data(data)
         newData[0..<9] = newUID
         newData[20..<52] = paddedDecrypted[0..<32]
@@ -116,6 +117,7 @@ struct TagDump : Codable, Equatable {
         
         var paddedEncrypted = Data(count: 392)
         paddedEncrypted[0..<(encryptedData.count)] = encryptedData[0..<(encryptedData.count)]
+        
         if paddedEncrypted.count != encryptedData.count {
             print("Encrypted data size mismatch")
         }

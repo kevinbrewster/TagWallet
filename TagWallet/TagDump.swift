@@ -69,6 +69,10 @@ struct TagDump : Codable, Equatable {
     
     private var writeCounter: Data { data.subdata(in: 17..<19) }
     var writeCounterInt: UInt16 {
+        if data[16] != 0xA5 {
+            return 0
+        }
+        
         let counterHex = writeCounter
         return (UInt16(counterHex[0]) << 8) | UInt16(counterHex[1])
     }

@@ -5,6 +5,10 @@ and optionally write those data dumps to a new blank tag.
 
 It's similar to the Android [TagMo](https://github.com/HiddenRamblings/TagMo) App.
 
+## Background
+
+[Reverse Engineering Nintendo Amiibo](https://kevinbrewster.github.io/Amiibo-Reverse-Engineering/)
+
 ## Requirements
 
 iPhone 7 or above and iOS 13 or above (for NFC write capabilities)

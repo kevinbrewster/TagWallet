@@ -76,9 +76,9 @@ struct TagDump : Codable, Equatable {
         let counterHex = writeCounter
         return (UInt16(counterHex[0]) << 8) | UInt16(counterHex[1])
     }
-    private var keygenSalt: Data { data.subdata(in: 96..<128) }
+    var keygenSalt: Data { data.subdata(in: 96..<128) }
     
-    func patchedDump(withUID newUID: TagUID, staticKey: TagKey, dataKey: TagKey, skipDecrypt: Bool = false) throws -> TagDump {
+    func patchedDump(withUID newUID: TagUID, staticKey: TagKey, dataKey: TagKey, skipDecrypt: Bool = false, withSalt newSalt: Data? = nil) throws -> TagDump {
         guard newUID.count == 9 else {
             throw Error.invalidUID
         }
@@ -99,20 +99,25 @@ struct TagDump : Codable, Equatable {
         if paddedDecrypted.count != decryptedData.count {
             print("Decrypted data size mismatch")
         }
+        
+        let newSalt = newSalt ?? keygenSalt
+        
+        
 
         var newData = Data(data)
         newData[0..<9] = newUID
         newData[20..<52] = paddedDecrypted[0..<32]
         newData[160..<520] = paddedDecrypted[32..<392]
+        newData[96..<128] = newSalt[0..<32]
         
                 
         // Generated tag HMAC
-        let encryptTagKeys = staticKey.derivedKey(uid: newUID, writeCounter: writeCounter, salt: keygenSalt)
+        let encryptTagKeys = staticKey.derivedKey(uid: newUID, writeCounter: writeCounter, salt: newSalt)
         let tagHMAC = encryptTagKeys.hmac(newData.subdata(in: 0..<8) + newData.subdata(in: 84..<128))
         newData[52..<84] = tagHMAC
         
         // Generated data HMAC
-        let encryptDataKeys = dataKey.derivedKey(uid: newUID, writeCounter: writeCounter, salt: keygenSalt)
+        let encryptDataKeys = dataKey.derivedKey(uid: newUID, writeCounter: writeCounter, salt: newSalt)
         let dataHMAC = encryptDataKeys.hmac(newData.subdata(in: 17..<52) + newData.subdata(in: 160..<520) + newData.subdata(in: 52..<84) + newData.subdata(in: 0..<8) + newData.subdata(in: 84..<128))
         newData[128..<160] = dataHMAC
         

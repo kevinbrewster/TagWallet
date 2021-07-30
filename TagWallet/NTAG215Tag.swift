@@ -133,7 +133,7 @@ class NTAG215Tag {
     
     func patchAndWriteAppData(_ originalDump: TagDump, staticKey: TagKey, dataKey: TagKey, completionHandler: @escaping (NFCMiFareTagWriteResult) -> Void) {
         do {
-            let patchedDump = try originalDump.patchedDump(withUID: dump.uid, staticKey: staticKey, dataKey: dataKey)
+            let patchedDump = try originalDump.patchedDump(withUID: dump.uid, staticKey: staticKey, dataKey: dataKey, withSalt: dump.isAmiibo ? dump.keygenSalt : nil)
             
             writeAppData(patchedDump, completionHandler: completionHandler)
         } catch let error {
